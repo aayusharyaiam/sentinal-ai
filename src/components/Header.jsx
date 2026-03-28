@@ -24,12 +24,6 @@ export default function Header() {
         </nav>
       </div>
       <div className="flex items-center gap-4">
-        <button className="p-2 text-on-surface-variant hover:bg-primary/5 transition-all duration-150 active:scale-95">
-          <span className="material-symbols-outlined">notifications_active</span>
-        </button>
-        <button className="p-2 text-on-surface-variant hover:bg-primary/5 transition-all duration-150 active:scale-95">
-          <span className="material-symbols-outlined">settings</span>
-        </button>
         <div className="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center cursor-pointer">
           <span className="material-symbols-outlined text-primary text-sm">account_circle</span>
         </div>
