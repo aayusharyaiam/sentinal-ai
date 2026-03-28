@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="bg-[#0a0e13] border-b border-[#44484e]/15 shadow-[0_0_15px_rgba(143,245,255,0.1)] flex justify-between items-center w-full px-6 py-3 top-0 z-50 sticky">
       <div className="flex items-center gap-8">
-        <h1 className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#8ff5ff] to-[#00eefc] font-['Orbitron'] tracking-wider uppercase">
+        <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#8ff5ff] to-[#00eefc] font-['Orbitron'] tracking-wider uppercase">
           SENTINEL
         </h1>
         <nav className="hidden md:flex gap-6">

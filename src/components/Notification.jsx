@@ -37,7 +37,7 @@ export default function Notification({ notification, onClose }) {
   };
 
   return (
-    <div className={`fixed top-6 right-6 z-[9999] border ${getColors()} p-4 rounded-sm flex items-center gap-3 gap-4 max-w-sm backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-right-4 duration-300`}>
+    <div className={`fixed top-6 right-6 z-[9999] border ${getColors()} p-4 rounded-sm flex items-center gap-3 max-w-sm backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-right-4 duration-300`}>
       <span className="material-symbols-outlined text-lg">{getIcon()}</span>
       <div className="flex flex-col gap-1">
         <div className="font-headline text-xs uppercase tracking-widest">{notification.title}</div>
