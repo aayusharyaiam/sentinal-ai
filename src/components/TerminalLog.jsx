@@ -3,16 +3,35 @@ import useSentinelStore from '../store/useSentinelStore';
 
 export default function TerminalLog() {
   const { logs, isAnalyzing } = useSentinelStore();
-  const bottomRef = useRef(null);
+  const headerRef = useRef(null);
+  const containerRef = useRef(null);
+  const prevAnalyzingRef = useRef(isAnalyzing);
 
+  // Scroll page to this section when analysis starts
   useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (isAnalyzing && !prevAnalyzingRef.current) {
+      if (headerRef.current) {
+        headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    prevAnalyzingRef.current = isAnalyzing;
+  }, [isAnalyzing]);
+
+  // Scroll inside the log container only if user is near bottom
+  useEffect(() => {
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      // Define a threshold (e.g. 150px) to consider "near bottom"
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
+      
+      if (isNearBottom) {
+        containerRef.current.scrollTop = scrollHeight;
+      }
     }
   }, [logs]);
 
   return (
-    <section className="w-full">
+    <section className="w-full" ref={headerRef}>
       <div className="flex items-center justify-between mb-4 mt-8">
         <div className="flex flex-col gap-1 w-full">
           {/* Top Divider inside section or before */}
@@ -46,7 +65,10 @@ export default function TerminalLog() {
           <div className="w-12"></div> {/* spacer for centering */}
         </div>
         
-        <div className="p-6 h-72 font-mono text-xs overflow-y-auto scrollbar-thin scrollbar-thumb-outline-variant scrollbar-track-surface-container-low relative">
+        <div 
+          ref={containerRef}
+          className="p-6 h-72 font-mono text-xs overflow-y-auto scrollbar-thin scrollbar-thumb-outline-variant scrollbar-track-surface-container-low relative"
+        >
           <div className="absolute top-0 right-0 p-4 opacity-10">
              <span className="material-symbols-outlined text-4xl">terminal</span>
           </div>
@@ -66,7 +88,6 @@ export default function TerminalLog() {
                <span className="text-on-surface-variant italic">Waiting for new input stream...</span>
             </div>
           )}
-          <div ref={bottomRef} />
         </div>
         </div>
       </div>

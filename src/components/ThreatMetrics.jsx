@@ -12,18 +12,12 @@ export default function ThreatMetrics() {
     return Math.min(99, Math.max(10, baseRate + patternBonus));
   };
 
-  // Calculate OWASP coverage based on risk score
+  // OWASP system coverage is static system capability
   const getOWASPCoverage = () => {
-    if (!result) return { llm01: 0, llm06: 0, llm02: 0 };
-    
-    const basePromptInjection = result.risk_score > 0.7 ? 99 : (result.risk_score > 0.4 ? 85 : 40);
-    const baseInfoDisclosure = result.risk_score > 0.4 ? 85 : (result.risk_score > 0.2 ? 60 : 30);
-    const baseOutputHandling = result.risk_score > 0.5 ? 80 : (result.risk_score > 0.3 ? 55 : 25);
-
     return {
-      llm01: Math.min(99.4, basePromptInjection),
-      llm06: Math.min(94.2, baseInfoDisclosure),
-      llm02: Math.min(88.7, baseOutputHandling)
+      llm01: 99.4,
+      llm06: 94.2,
+      llm02: 88.7
     };
   };
 
@@ -63,33 +57,7 @@ export default function ThreatMetrics() {
         </div>
 
         <div className="p-6 flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Detection Rate Chart */}
-            <div className="bg-surface-container-lowest p-6 border border-outline-variant/10">
-          <h3 className="text-[10px] font-headline text-on-surface-variant mb-6 uppercase tracking-widest">
-            {result ? 'Threat Detection Rate' : 'Pattern Detection Rate'}
-          </h3>
-          <div className="flex items-end gap-1 h-32 mb-4">
-            {versions.map((v, idx) => (
-              <div key={idx} className="flex-1 relative group">
-                <div 
-                  className={`${getBarColor(v.rate)} border-t-2 border-primary h-full transition-all duration-500`}
-                  style={{ height: `${Math.max(5, (v.rate / 100) * 100)}%` }}
-                ></div>
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  {v.rate.toFixed(0)}%
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between text-[8px] font-mono text-on-surface-variant uppercase">
-            <span>v1.0</span><span>v1.2</span><span>v2.0</span><span>v2.5</span>
-            <span className={result ? 'text-tertiary font-bold' : 'text-primary'}>
-              {result ? 'LIVE' : 'Current'}
-            </span>
-          </div>
-        </div>
-
+          <div className="grid grid-cols-1 gap-4">
         {/* OWASP Coverage */}
         <div className="bg-surface-container-lowest p-6 border border-outline-variant/10">
           <h3 className="text-[10px] font-headline text-on-surface-variant mb-4 uppercase tracking-widest">

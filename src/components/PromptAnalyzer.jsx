@@ -45,7 +45,7 @@ export default function PromptAnalyzer() {
           <div className="w-12"></div> {/* spacer for centering */}
         </div>
 
-        <div className="p-6 relative glow-primary flex-1">
+        <div className="p-6 relative flex-1">
           <div className="absolute top-0 right-0 p-2 opacity-20">
             <span className="material-symbols-outlined text-4xl">terminal</span>
           </div>
@@ -101,21 +101,6 @@ export default function PromptAnalyzer() {
         </div>
       </div>
 
-      {/* Core Concepts Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-surface-container-low p-4 border-l-2 border-primary/30">
-          <h4 className="text-[10px] font-headline text-primary mb-2 tracking-tighter">SEMANTIC INTENT</h4>
-          <p className="text-xs text-on-surface-variant leading-relaxed">High-parameter classification of underlying user motives and jailbreak logic.</p>
-        </div>
-        <div className="bg-surface-container-low p-4 border-l-2 border-primary/30">
-          <h4 className="text-[10px] font-headline text-primary mb-2 tracking-tighter">VECTOR ANOMALIES</h4>
-          <p className="text-xs text-on-surface-variant leading-relaxed">Comparison against billions of known adversarial embeddings in vector space.</p>
-        </div>
-        <div className="bg-surface-container-low p-4 border-l-2 border-primary/30">
-          <h4 className="text-[10px] font-headline text-primary mb-2 tracking-tighter">PATTERN MATCHING</h4>
-          <p className="text-xs text-on-surface-variant leading-relaxed">Dynamic heuristic signatures for rapid-fire rejection of known injection payloads.</p>
-        </div>
-      </div>
     </section>
   );
 }

@@ -36,7 +36,7 @@ export default function VerdictPanel() {
   const statusText = result ? result.status : (isAnalyzing ? "ANALYZING..." : "STANDBY");
   const riskLevelText = result ? `RISK LEVEL: ${result.risk_score > 0.7 ? 'CRITICAL' : (result.risk_score > 0.4 ? 'ELEVATED' : 'LOW')}` : "RISK LEVEL: UNKNOWN";
   const confidenceText = result ? `${(result.confidence * 100).toFixed(1)}% CONFIDENCE` : "0.0% CONFIDENCE";
-  
+
   // Bar width starts 0, completes based on risk_score
   const barWidth = result ? `${result.risk_score * 100}%` : "0%";
 
@@ -64,36 +64,36 @@ export default function VerdictPanel() {
         <div className="p-8 relative flex-1">
           <div className="flex flex-col items-center text-center gap-4 mb-8">
             <div className="text-[10px] uppercase tracking-widest text-on-surface-variant font-mono">Threat Status</div>
-          <div className={`text-5xl font-black font-headline tracking-tighter ${isAnalyzing && currentStage < 5 ? 'animate-pulse' : ''} ${getStatusColor()}`}>
-            {statusText}
-          </div>
-
-          <div className="w-full bg-surface-container-lowest h-1.5 mt-4 overflow-hidden relative">
-            <div 
-              className={`h-full transition-all duration-1000 ease-out ${getBgColor()}`} 
-              style={{ width: barWidth, boxShadow: `0 0 8px ${getShadowColor()}` }}
-            ></div>
-          </div>
-
-          <div className={`flex justify-between w-full text-[10px] font-mono ${getStatusColor()}`}>
-            <span>{riskLevelText}</span>
-            <span>{confidenceText}</span>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          {result?.reason && (
-            <div className={`bg-surface-container-highest p-4 border border-outline-variant/20 text-xs text-on-surface-variant leading-relaxed text-left relative`}>
-              <div className={`absolute top-0 left-0 w-1 h-full ${getBgColor()}`}></div>
-              <span className={`font-headline text-[10px] uppercase flex items-center gap-1 mb-2 ${getStatusColor()}`}>
-                <span className="material-symbols-outlined text-[14px]">psychology</span>
-                Analysis Reasoning
-              </span>
-              {result.reason}
+            <div className={`text-5xl font-black font-headline tracking-tighter ${isAnalyzing && currentStage < 5 ? 'animate-pulse' : ''} ${getStatusColor()}`}>
+              {statusText}
             </div>
-          )}
-          <LayerBreakdown />
-        </div>
+
+            <div className="w-full bg-surface-container-lowest h-1.5 mt-4 overflow-hidden relative">
+              <div
+                className={`h-full transition-all duration-1000 ease-out ${getBgColor()}`}
+                style={{ width: barWidth, boxShadow: `0 0 8px ${getShadowColor()}` }}
+              ></div>
+            </div>
+
+            <div className={`flex justify-between w-full text-[10px] font-mono ${getStatusColor()}`}>
+              <span>{riskLevelText}</span>
+              <span>{confidenceText}</span>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            {result?.reason && (
+              <div className={`bg-surface-container-highest p-4 border border-outline-variant/20 text-xs text-on-surface-variant leading-relaxed text-left relative`}>
+                <div className={`absolute top-0 left-0 w-1 h-full ${getBgColor()}`}></div>
+                <span className={`font-headline text-[10px] uppercase flex items-center gap-1 mb-2 ${getStatusColor()}`}>
+                  <span className="material-symbols-outlined text-[14px]">psychology</span>
+                  Analysis Reasoning
+                </span>
+                {result.reason}
+              </div>
+            )}
+            <LayerBreakdown />
+          </div>
         </div>
       </div>
     </section>

@@ -44,7 +44,7 @@ export default function Footer() {
             {/* Live UTC Clock */}
             <div className="text-primary/80 font-mono text-[10px] border border-primary/20 bg-primary/5 px-2 py-1 flex items-center gap-2 tabular-nums">
               <span className="material-symbols-outlined text-[14px]">schedule</span>
-              {time.toISOString().split('T')[1].substring(0, 8)} UTC
+              {time.toLocaleTimeString('en-US', { hour12: false })} LOCAL
             </div>
           </div>
         </div>

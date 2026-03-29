@@ -32,7 +32,6 @@ export default function LayerBreakdown() {
       <div className={`border-t border-outline-variant/10 pt-4 transition-opacity duration-500 ${currentStage > 1 ? 'opacity-100' : 'opacity-30'}`}>
         <div className="flex justify-between items-center mb-2">
           <span className="text-[10px] font-headline text-primary uppercase">Layer 01: Intent Classifier</span>
-          <span className="font-mono text-[10px] text-on-surface-variant">LLAMA 3.3 70B</span>
         </div>
         <div className="flex items-center justify-between p-3 bg-surface-container-lowest">
           <span className={`text-sm font-semibold ${result?.status === 'BLOCKED' ? 'text-secondary' : (result?.status === 'SUSPICIOUS' ? 'text-tertiary' : 'text-primary')}`}>
@@ -70,13 +69,13 @@ export default function LayerBreakdown() {
       {/* Layer 3 / Detection Findings */}
       <div className={`bg-surface-container-lowest p-4 border transition-colors duration-500 ${currentStage > 3 ? (result && result.anomaly ? 'border-secondary/20' : 'border-outline-variant/20') : 'border-outline-variant/10 opacity-30'}`}>
         <div className="text-[10px] font-headline text-on-surface-variant mb-2 flex justify-between">
-          <span>REASONING_LOG</span>
+          <span>LAYER 03: ANOMALY DETECTOR</span>
           {currentStage > 3 && result && (
-            <span className={result.anomaly ? 'text-secondary font-bold' : 'text-primary'}>ANOMALY: {result.anomaly ? "TRUE" : "FALSE"}</span>
+            <span className={result.anomaly ? 'text-secondary font-bold' : 'text-primary'}>ANOMALY: {result.anomaly ? "DETECTED" : "CLEAR"}</span>
           )}
         </div>
         <p className="font-mono text-xs leading-relaxed text-[#a8abb2]">
-          {currentStage > 4 && result ? `"${result.reason}"` : (currentStage > 3 ? "Generating reasoning output..." : "Standby for reasoning output...")}
+          {currentStage > 4 && result ? (result.anomaly ? "Significant linguistic deviation or structural anomaly detected in vector space." : "No structural anomalies or significant linguistic deviation detected.") : (currentStage > 3 ? "Scanning for structural anomalies..." : "Standby for anomaly scan...")}
         </p>
       </div>
     </>
