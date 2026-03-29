@@ -32,7 +32,6 @@ export default function VerdictPanel() {
   };
 
   const statusText = result ? result.status : (isAnalyzing ? "ANALYZING..." : "STANDBY");
-  const outputCategoryText = result ? `OUTPUT CATEGORY: ${result.category || 'UNKNOWN'}` : "OUTPUT CATEGORY: STANDBY";
   const confidenceText = result ? `${(result.confidence * 100).toFixed(1)}% CONFIDENCE` : "0.0% CONFIDENCE";
 
   // Bar width starts 0, completes based on risk_score
@@ -73,8 +72,7 @@ export default function VerdictPanel() {
               ></div>
             </div>
 
-            <div className={`flex justify-between w-full text-[10px] font-mono ${getStatusColor()}`}>
-              <span>{outputCategoryText}</span>
+            <div className={`flex justify-end w-full text-[10px] font-mono ${getStatusColor()}`}>
               <span>{confidenceText}</span>
             </div>
           </div>
