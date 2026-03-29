@@ -1,6 +1,4 @@
-import React from 'react';
 import useSentinelStore from '../store/useSentinelStore';
-import LayerBreakdown from './LayerBreakdown';
 
 export default function VerdictPanel() {
   const { isAnalyzing, currentStage, result } = useSentinelStore();
@@ -34,7 +32,7 @@ export default function VerdictPanel() {
   };
 
   const statusText = result ? result.status : (isAnalyzing ? "ANALYZING..." : "STANDBY");
-  const riskLevelText = result ? `RISK LEVEL: ${result.risk_score > 0.7 ? 'CRITICAL' : (result.risk_score > 0.4 ? 'ELEVATED' : 'LOW')}` : "RISK LEVEL: UNKNOWN";
+  const outputCategoryText = result ? `OUTPUT CATEGORY: ${result.category || 'UNKNOWN'}` : "OUTPUT CATEGORY: STANDBY";
   const confidenceText = result ? `${(result.confidence * 100).toFixed(1)}% CONFIDENCE` : "0.0% CONFIDENCE";
 
   // Bar width starts 0, completes based on risk_score
@@ -76,7 +74,7 @@ export default function VerdictPanel() {
             </div>
 
             <div className={`flex justify-between w-full text-[10px] font-mono ${getStatusColor()}`}>
-              <span>{riskLevelText}</span>
+              <span>{outputCategoryText}</span>
               <span>{confidenceText}</span>
             </div>
           </div>
@@ -92,7 +90,17 @@ export default function VerdictPanel() {
                 {result.reason}
               </div>
             )}
-            <LayerBreakdown />
+            
+            <div className={`bg-surface-container-highest p-4 border border-outline-variant/20 text-xs text-on-surface-variant leading-relaxed text-left relative`}>
+              <div className={`absolute top-0 left-0 w-1 h-full ${getBgColor()}`}></div>
+              <span className={`font-headline text-[10px] uppercase flex items-center gap-1 mb-2 ${getStatusColor()}`}>
+                <span className="material-symbols-outlined text-[14px]">label</span>
+                Output Category
+              </span>
+              <span className="font-mono text-base uppercase font-bold">
+                {result ? (result.category || 'UNKNOWN') : 'STANDBY'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
