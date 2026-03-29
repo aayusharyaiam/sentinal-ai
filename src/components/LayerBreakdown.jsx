@@ -66,18 +66,7 @@ export default function LayerBreakdown() {
         </div>
       </div>
 
-      {/* Layer 3 / Detection Findings */}
-      <div className={`bg-surface-container-lowest p-4 border transition-colors duration-500 ${currentStage > 3 ? (result && result.anomaly ? 'border-secondary/20' : 'border-outline-variant/20') : 'border-outline-variant/10 opacity-30'}`}>
-        <div className="text-[10px] font-headline text-on-surface-variant mb-2 flex justify-between">
-          <span>LAYER 03: ANOMALY DETECTOR</span>
-          {currentStage > 3 && result && (
-            <span className={result.anomaly ? 'text-secondary font-bold' : 'text-primary'}>ANOMALY: {result.anomaly ? "DETECTED" : "CLEAR"}</span>
-          )}
-        </div>
-        <p className="font-mono text-xs leading-relaxed text-[#a8abb2]">
-          {currentStage > 4 && result ? (result.anomaly ? "Significant linguistic deviation or structural anomaly detected in vector space." : "No structural anomalies or significant linguistic deviation detected.") : (currentStage > 3 ? "Scanning for structural anomalies..." : "Standby for anomaly scan...")}
-        </p>
-      </div>
+
     </>
   );
 }
