@@ -60,10 +60,10 @@ export default {
         "on-surface-variant": "#a8abb2"
       },
       fontFamily: {
-        "headline": ["Orbitron", "sans-serif"],
-        "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"],
-        "mono": ["JetBrains Mono", "monospace"]
+        "headline": ["Montserrat", "sans-serif"],
+        "body": ["Karla", "sans-serif"],
+        "label": ["Karla", "sans-serif"],
+        "mono": ["Space Mono", "monospace"]
       },
       borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
     },

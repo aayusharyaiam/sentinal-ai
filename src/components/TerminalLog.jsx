@@ -32,11 +32,25 @@ export default function TerminalLog() {
         </div>
       </div>
 
-      <div className="bg-surface-container-lowest p-6 h-72 font-mono text-xs overflow-y-auto border border-outline-variant/10 scrollbar-thin scrollbar-thumb-outline-variant scrollbar-track-surface-container-low relative">
-        <div className="absolute top-0 right-0 p-4 opacity-10">
-           <span className="material-symbols-outlined text-4xl">terminal</span>
+      <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-sm shadow-2xl relative flex flex-col">
+        {/* Titlebar */}
+        <div className="bg-surface-container-highest px-4 py-3 flex items-center border-b border-outline-variant/20">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+          </div>
+          <div className="mx-auto text-[10px] font-mono tracking-widest text-[#8ff5ff]/80 uppercase">
+            Prompt-shield :: live-log
+          </div>
+          <div className="w-12"></div> {/* spacer for centering */}
         </div>
-        <div className="space-y-3">
+        
+        <div className="p-6 h-72 font-mono text-xs overflow-y-auto scrollbar-thin scrollbar-thumb-outline-variant scrollbar-track-surface-container-low relative">
+          <div className="absolute top-0 right-0 p-4 opacity-10">
+             <span className="material-symbols-outlined text-4xl">terminal</span>
+          </div>
+          <div className="space-y-3">
           {logs.map((log, index) => (
             <div key={index} className="flex gap-4 group hover:bg-surface-container-high/50 px-2 py-1 transition-colors">
               <span className="text-on-surface-variant font-bold opacity-70">[{log.time}]</span>
@@ -53,6 +67,7 @@ export default function TerminalLog() {
             </div>
           )}
           <div ref={bottomRef} />
+        </div>
         </div>
       </div>
     </section>

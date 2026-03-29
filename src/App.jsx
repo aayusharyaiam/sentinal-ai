@@ -83,6 +83,11 @@ function App() {
           <VerdictPanel />
         </div>
 
+        {/* LOG PANEL */}
+        <div id="logs">
+          <TerminalLog />
+        </div>
+
         {/* THREAT METRICS & RED TEAMING ROW */}
         <div id="metrics" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <ThreatMetrics />
@@ -90,24 +95,17 @@ function App() {
           <section className="lg:col-span-4 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <div className="w-1 h-6 bg-tertiary"></div>
-              <h2 className="font-headline text-xl tracking-widest uppercase text-tertiary">Sentinel Red</h2>
+              <h2 className="font-headline text-xl tracking-widest uppercase text-tertiary">Data Export</h2>
             </div>
             <div className="bg-surface-container-low p-6 border border-tertiary/20 relative group overflow-hidden flex flex-col h-full">
               <div className="absolute -right-4 -bottom-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                <span className="material-symbols-outlined text-[160px] text-tertiary">radar</span>
+                <span className="material-symbols-outlined text-[160px] text-tertiary">file_download</span>
               </div>
-              <div className="text-[10px] font-headline text-tertiary mb-2">AUTONOMOUS RED TEAMING</div>
+              <div className="text-[10px] font-headline text-tertiary mb-2">THREAT INTELLIGENCE</div>
               <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
-                Module continuously probes the active firewall with synthetic jailbreak vectors. Self-play mechanisms evolve protection layers against zero-day prompt variants.
+                Export full analysis results including risk indicators, pattern matching, and comprehensive reasoning data into a structured JSON report.
               </p>
               <div className="mt-auto space-y-4">
-                <div className="flex items-center justify-between p-3 bg-surface-container-lowest border border-tertiary/10">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
-                    <span className="text-[10px] font-mono uppercase">Probing Active...</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-tertiary">3,421 Vectors/sec</span>
-                </div>
                 <button 
                   onClick={downloadThreatReport}
                   className="w-full py-3 border border-tertiary text-tertiary font-headline text-[10px] tracking-widest hover:bg-tertiary hover:text-[hsl(36,100%,18%)] transition-all active:scale-95">
@@ -116,11 +114,6 @@ function App() {
               </div>
             </div>
           </section>
-        </div>
-
-        {/* LOG PANEL */}
-        <div id="logs">
-          <TerminalLog />
         </div>
 
       </main>

@@ -43,8 +43,9 @@ const useSentinelStore = create((set, get) => ({
         ...rawResponse,
         // Map typical keys in case backend uses slightly different naming (like "detected patterns")
         patterns: Array.isArray(rawResponse.patterns) ? rawResponse.patterns : (rawResponse['detected patterns'] || rawResponse.detected_patterns || []),
-        // Mocking a category for L1 and anomaly for L3 logs as the backend returns an aggregated object
-        category: rawResponse.status === 'BLOCKED' ? 'jailbreak_heuristic' : 'safe',
+        // Use values from backend if present, else default
+        category: rawResponse.category || (rawResponse.status === 'BLOCKED' ? 'jailbreak_heuristic' : 'safe'),
+        reason: rawResponse.reason || null,
         anomaly: rawResponse.status === 'BLOCKED' ? true : false,
         confidence: typeof rawResponse.confidence === 'number' ? rawResponse.confidence : 0.95,
         risk_score: typeof rawResponse.risk_score === 'number' ? rawResponse.risk_score : 0,

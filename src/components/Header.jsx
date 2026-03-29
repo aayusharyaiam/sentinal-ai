@@ -23,11 +23,6 @@ export default function Header() {
           ))}
         </nav>
       </div>
-      <div className="flex items-center gap-4">
-        <div className="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center cursor-pointer">
-          <span className="material-symbols-outlined text-primary text-sm">account_circle</span>
-        </div>
-      </div>
     </header>
   );
 }

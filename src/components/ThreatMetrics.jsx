@@ -7,8 +7,9 @@ export default function ThreatMetrics() {
   // Calculate detection rate based on patterns found
   const getDetectionRate = () => {
     if (!result) return 0;
-    if (result.patterns.length === 0) return 10; // Low baseline if no patterns
-    return Math.min(95, 20 + (result.patterns.length * 15)); // Max 95%
+    const baseRate = result.risk_score * 100;
+    const patternBonus = (result.patterns?.length || 0) * 5;
+    return Math.min(99, Math.max(10, baseRate + patternBonus));
   };
 
   // Calculate OWASP coverage based on risk score
@@ -47,15 +48,24 @@ export default function ThreatMetrics() {
 
   return (
     <section className="lg:col-span-8 flex flex-col gap-6">
-      <div className="flex items-center gap-3">
-        <div className={`w-1 h-6 ${isAnalyzing ? 'bg-tertiary animate-pulse' : 'bg-primary'} transition-all`}></div>
-        <h2 className={`font-headline text-xl tracking-widest uppercase ${isAnalyzing ? 'text-tertiary' : 'text-primary'} transition-colors`}>
-          Threat Metrics {result ? '// LIVE ANALYSIS' : '// OWASP LLM01'}
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Detection Rate Chart */}
-        <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+      <div className={`bg-surface-container-low border border-outline-variant/20 rounded-sm shadow-2xl relative flex flex-col`}>
+        {/* Titlebar */}
+        <div className="bg-surface-container-highest px-4 py-3 flex items-center border-b border-outline-variant/20">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+          </div>
+          <div className={`mx-auto text-[10px] font-mono tracking-widest uppercase ${isAnalyzing ? 'text-tertiary animate-pulse' : 'text-[#8ff5ff]/80'}`}>
+            Prompt-shield :: metrics
+          </div>
+          <div className="w-12"></div> {/* spacer for centering */}
+        </div>
+
+        <div className="p-6 flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Detection Rate Chart */}
+            <div className="bg-surface-container-lowest p-6 border border-outline-variant/10">
           <h3 className="text-[10px] font-headline text-on-surface-variant mb-6 uppercase tracking-widest">
             {result ? 'Threat Detection Rate' : 'Pattern Detection Rate'}
           </h3>
@@ -81,7 +91,7 @@ export default function ThreatMetrics() {
         </div>
 
         {/* OWASP Coverage */}
-        <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+        <div className="bg-surface-container-lowest p-6 border border-outline-variant/10">
           <h3 className="text-[10px] font-headline text-on-surface-variant mb-4 uppercase tracking-widest">
             {result ? `OWASP Top 10 - ${result.status}` : 'OWASP Top 10 Coverage'}
           </h3>
@@ -139,7 +149,7 @@ export default function ThreatMetrics() {
 
       {/* Live Status Indicator */}
       {result && (
-        <div className={`bg-surface-container-low p-4 border transition-all ${
+        <div className={`bg-surface-container-lowest p-4 border transition-all ${
           result.status === 'BLOCKED' ? 'border-secondary/30 text-secondary' :
           result.status === 'SUSPICIOUS' ? 'border-tertiary/30 text-tertiary' :
           'border-primary/30 text-primary'
@@ -157,6 +167,8 @@ export default function ThreatMetrics() {
           </div>
         </div>
       )}
+        </div>
+      </div>
     </section>
   );
 }
